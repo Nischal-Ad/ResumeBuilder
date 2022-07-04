@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.2/jspdf.min.js"
+			integrity="sha256-7yY4x9Gb1vqsx0jySxkg5lw+QnCz9Gt7Oio5I/lSj2M="
+			crossorigin="anonymous"
+		></script>
+		<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+		<script src="./fetchdata.js"></script>
+
+    <title>Document</title>
+    <style>
+        html,
+        body,
+        * {
+            box-sizing: border-box;
+            color: #111211;
+            margin: 0;
+            padding: 0;
+        }
+
+        button {
+            cursor: pointer;
+            height: 50px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 150px;
+        }
+
+        #main-container {
+            background-size: cover;
+            display: flex;
+            font-weight: 400;
+            justify-content: center;
+            margin: 0;
+            padding-bottom: 10px;
+            width: 100%;
+        }
+
+        .page {
+            box-sizing: border-box;
+            height: 29.684cm;
+            margin: 0;
+            padding: 0;
+            width: 21.1cm;
+        }
+
+        .page > * {
+            margin: 0;
+        }
+
+        header {
+            background-color:rgb(165, 209, 53);
+            height: 9%;
+            padding: 12px 20px;
+        }
+
+        header .name,
+        header .major {
+            color: yellow;
+            font-family: Helvetica, sans-serif;
+            font-weight: 200;
+            margin: 0;
+        }
+
+        header .major {
+            font-weight: 50;
+            margin-top: 5px;
+        }
+
+        .contents {
+            box-sizing: border-box;
+            display: flex;
+            height: 91%;
+            width: 100%;
+        }
+
+        .main-section {
+            background-color:rgb(244, 223, 118);
+            display: inline-block;
+            width: 100%;
+            font-size: medium;
+        }
+
+        .main-section > section {
+            padding: 20px;
+        }
+
+        .highlights {
+            font-family: Helvetica, sans-serif;
+            font-size: small;
+            font-weight: 100;
+            text-align: left;
+            word-spacing: normal;
+            font-variant: normal;
+        }
+
+        li {
+            font-variant: normal;
+            font-weight: 100;
+        }
+
+        .section-title {
+            border-bottom: 1px solid #bdbdbd;
+            color: rgb(83, 156, 79);
+            font-family: Tahoma, sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .right-section {
+            background-color:#bdeea6 ;
+            display: inline-block;
+            width: 30%;
+        }
+
+        .experience-card {
+            font-family: Helvetica, sans-serif;
+            padding: 10px 0;
+        }
+
+        .experience-card .title {
+            color: #1d8e2c;
+            font-family: Helvetica, sans-serif;
+            font-size: 17px;
+        }
+
+        .experience-card .company {
+            font-family: Helvetica, sans-serif;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .experience-card .company .name {
+            color: #1d8e2c;
+            font-weight: bold;
+        }
+
+        .experience-card .company .duration {
+            color: #1d8e2c;
+            font-size: 14px;
+        }
+
+        ul {
+            font-family: Helvetica, sans-serif;
+            font-size: small;
+            list-style: disc;
+            list-style-position: inside;
+        }
+
+        .certificate-card {
+            color:#1d8e2c;
+            font-family: Helvetica, sans-serif;
+            margin: 8px 0;
+        }
+
+        .date {
+            color: #1d8e2c;
+            font-size: small;
+        }
+
+        .education-card {
+            color: #1d8e2c;
+            font-family: Helvetica, sans-serif;
+            margin: 8px 0;
+        }
+
+        .education-card .institution {
+            font-size: small;
+        }
+
+        .info-item {
+            color: #1d8e2c;
+            font-family: Helvetica, sans-serif;
+            font-size: small;
+            margin-top: 10px;
+        }
+
+        .info-item .info {
+            display: block;
+            font-weight: 100;
+            margin-top: 6px;
+        }
+
+        .link {
+            color: white;
+            font-family: Helvetica, sans-serif;
+            margin-top: 5px;
+        }
+
+        .skill-card {
+            display: flex;
+            font-family: Helvetica, sans-serif;
+            font-size: small;
+            justify-content: space-between;
+            padding: 20px 0;
+        }
+
+        .skill-level-container {
+            display: flex;
+        }
+
+        .disc {
+            background-color: #c2c2c2;
+            border-radius: 50%;
+            display: inline-block;
+            height: 12px;
+            margin-right: 2px;
+            width: 12px;
+            position: relative;
+        }
+
+        .fill {
+            background-color: rgb(172, 247, 135);
+        }
+
+        .half-disc-left {
+            height: 12px;
+            width: 6px;
+            border-radius: 90px 0 0 90px;
+            background: rgb(138, 181, 227);
+        }
+
+        .concentric-half {
+            background-color: rgb(125, 165, 208);
+            height: 6px;
+            width: 6px;
+            position: absolute;
+            top: 25%;
+            left: 25%;
+        }
+    </style>
+
+    <body>
+		<div id="main-container">
+			<button id="cmd">Download PDF</button>
+			<div class="page" id="toPrint">
+				<header>
+					<h1 class="name" id="name">Example</h1>
+					<p class="link" id="github"></p>
+					<p class="link" id="github"></p>
+					<h3 class="major" id="linkdin"></h3>
+				</header>
+				<section class="contents">
+					<section class="main-section">
+						<section class="highlights" id="job">
+							Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero
+							laudantium, earum aut ex tempora similique, a distinctio dolorum
+							numquam cumque saepe eaque itaque laborum odio exercitationem
+							illum possimus, soluta quis explicabo quisquam obcaecati. Dolores
+							neque, ipsa quas magnam facere voluptatum saepe, ab blanditiis,
+							quae autem modi repellat pariatur! Porro, nemo.
+                        </section>
+
+                        	<section class="experience">
+							<div class="section-title">Skills</div>
+							<div class="experience-card">
+								<div class="title" id="workJob">Position</div>
+								<div class="company">
+									<span class="name" id="companyName">Company</span>
+									<span class="duration" id="workstartDate">Oct 2013 </span>-
+									<span class="duration" id="workendDate"> Nov 2016</span>
+								</div>
+								<div>
+									<p class="experience-list" id="workDesc">
+										Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+										Ipsa a, aliquam assumenda eaque quas repudiandae libero
+										expedita distinctio laudantium odit laborum veritatis soluta
+										perspiciatis explicabo voluptas quibusdam magni corporis
+										officia.
+									</p>
+								</div>
+							</div>
+						</section>
+
+						<section class="experience">
+							<div class="section-title">Experience</div>
+							<div class="experience-card">
+								<div class="title" id="workJob">Position</div>
+								<div class="company">
+									<span class="name" id="companyName">Company</span>
+									<span class="duration" id="workstartDate">Oct 2013 </span>-
+									<span class="duration" id="workendDate"> Nov 2016</span>
+								</div>
+								<div>
+									<p class="experience-list" id="workDesc">
+										Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+										Ipsa a, aliquam assumenda eaque quas repudiandae libero
+										expedita distinctio laudantium odit laborum veritatis soluta
+										perspiciatis explicabo voluptas quibusdam magni corporis
+										officia.
+									</p>
+								</div>
+							</div>
+						</section>
+                        
+                        <section class="personal-info">
+                            <div class="section-title">Personal Info</div>
+                            <div class="info-item">
+                                <span class="info" id="email">Information Line</span>
+                                <span class="info" id="phone">Information Line</span>
+                            </div>
+                        </section>
+                        <section class="education">
+							<div class="section-title">Education</div>
+							<div class="education-card">
+								<div class="title" id="department">Title</div>
+								<div class="institution" id="collage">Institution</div>
+								<div class="date">
+									<span id="startDate">jan 28</span> -
+									<span id="endDate">nov 28</span>
+								</div>
+							</div>
+						</section>
+                    </section>
+                </section>
+                
+			</div>
+		</div>
+		<script>
+			window.html2canvas = html2canvas;
+			const btnGenerate = document.getElementById('cmd');
+			const source = window.document.getElementById('toPrint');
+
+			function generatePdf() {
+				const pdf = new jsPDF('p', 'pt', [595, 842]);
+				const printSource = source.cloneNode(true);
+				const lists = printSource.getElementsByClassName('experience-list');
+
+				for (const list of lists) {
+					list.style.marginLeft = '10px';
+				}
+
+				pdf.html(printSource, {
+					html2canvas: {
+						scale: 0.75,
+					},
+					callback: function (pdf) {
+						pdf.save('resume.pdf');
+					},
+				});
+			}
+
+			btnGenerate.addEventListener('click', generatePdf);
+		</script>
+	</body>
+</html>

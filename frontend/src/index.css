@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.shape {
+		border-radius: 33% 67% 70% 30% / 36% 35% 65% 64%;
+	}
+
+	* {
+		@apply font-nunito;
+	}
+
+	h1 {
+		@apply font-poppins text-4xl font-bold;
+	}
+
+	h2 {
+		@apply font-poppins text-2xl font-semibold;
+	}
+
+	h3 {
+		@apply font-poppins text-xl font-medium pb-2;
+	}
+
+	h4 {
+		@apply font-poppins font-medium;
+	}
+
+	p {
+		@apply leading-[30px] text-gray-500;
+	}
+
+	span {
+		@apply leading-[30px] text-gray-500;
+	}
+
+	.active {
+		@apply font-poppins font-bold text-[#7B241C];
+	}
+
+	.form {
+		@apply my-5;
+	}
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+
+	.form-span {
+		@apply text-red-500 flex;
+	}
+
+	.form-input {
+		@apply w-full py-2 border-2 rounded-xl outline-gray-400 px-3 text-gray-700;
+	}
+
+	#root {
+		display: flex;
+		min-height: 100vh;
+		flex-direction: column;
+	}
+}
