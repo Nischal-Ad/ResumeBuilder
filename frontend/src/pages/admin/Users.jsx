@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import MetaData from '../../extra/MetaData';
-import { loadAllUser, clearError } from '../../actions/userAction';
+import { clearError } from '../../actions/userAction';
 import GetAllUser from '../../extra/GetAllUser';
 import Loading from '../../extra/Loading';
 import { toast } from 'react-toastify';
@@ -17,8 +17,6 @@ const Users = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(loadAllUser());
-
 		if (error) {
 			alert.error(error);
 			dispatch(clearError());

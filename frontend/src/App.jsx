@@ -44,10 +44,10 @@ const App = () => {
 				families: ['Nunito', 'Quicksand', 'Poppins'],
 			},
 		});
-		store.dispatch(loadAllUser());
 		store.dispatch(getAllRecommendation());
 		store.dispatch(loadUser());
 		store.dispatch(getAllResume());
+		store.dispatch(loadAllUser());
 		store.dispatch(loadAllTemplate());
 	}, []);
 

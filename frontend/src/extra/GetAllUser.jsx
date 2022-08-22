@@ -36,11 +36,11 @@ const GetAllUser = ({ name, email, role, index, _id }) => {
 		}
 
 		if (isDeleted) {
-			window.location.reload(false);
+			// window.location.reload(false);
 			nevigate('/users');
 		}
 		if (isUpdated) {
-			window.location.reload(false);
+			// window.location.reload(false);
 			nevigate('/users');
 		}
 	}, [dispatch, alert, error, isDeleted, nevigate, isUpdated]);
