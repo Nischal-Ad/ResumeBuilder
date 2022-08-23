@@ -45,6 +45,7 @@ const GetAllUser = ({ name, email, role, index, _id }) => {
 			dispatch(clearError());
 		}
 
+<<<<<<< HEAD
 		// if (isDeleted) {
 		// 	// window.location.reload(false);
 
@@ -56,6 +57,17 @@ const GetAllUser = ({ name, email, role, index, _id }) => {
 		// 	navigate('/users');
 		// }
 	}, [dispatch, alert, error]);
+=======
+		if (isDeleted) {
+			// window.location.reload(false);
+			nevigate('/users');
+		}
+		if (isUpdated) {
+			// window.location.reload(false);
+			nevigate('/users');
+		}
+	}, [dispatch, alert, error, isDeleted, nevigate, isUpdated]);
+>>>>>>> 9d22a9d243ac2784801fdbb8f9bf07da8be5079d
 
 	return (
 		<>

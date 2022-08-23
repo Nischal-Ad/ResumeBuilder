@@ -17,7 +17,7 @@ const AdminHome = () => {
 	useEffect(() => {
 		var adminCount = 0;
 		var userCount = 0;
-		for (let i = 0; i < users.length; i++) {
+		for (let i = 0; i < users?.length; i++) {
 			if (users[i].role === 'admin') {
 				adminCount = adminCount + 1;
 			} else {
@@ -30,14 +30,18 @@ const AdminHome = () => {
 		const name = [];
 		const countdata = [];
 
-		for (let i = 0; i < recommendedData.length; i++) {
+		for (let i = 0; i < recommendedData?.length; i++) {
 			countdata.push(recommendedData[i].count);
 			let check = template?.find((e) => e._id === recommendedData[i].template);
 			name.push(check?.name);
 		}
 		setCountData(countdata);
 		setTemplateName(name);
+<<<<<<< HEAD
 	}, [template, recommendedData, users]);
+=======
+	}, [users, recommendedData, template]);
+>>>>>>> 9d22a9d243ac2784801fdbb8f9bf07da8be5079d
 
 	return (
 		<>

@@ -239,11 +239,13 @@ export const adminReducer = (state = { users: [] }, action) => {
 	switch (action.type) {
 		case ALL_USER_REQUEST:
 			return {
+				...state,
 				loading: true,
 			};
 
 		case ALL_USER_SUCCESS:
 			return {
+				...state,
 				loading: false,
 				users: action.payload,
 			};
