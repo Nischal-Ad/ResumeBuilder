@@ -1,27 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { delUser, clearError, updateRole } from '../actions/userAction';
+import {
+	delUser,
+	clearError,
+	updateRole,
+	loadAllUser,
+} from '../actions/userAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
+// import { Navigate } from 'react-router-dom';
 
 const GetAllUser = ({ name, email, role, index, _id }) => {
 	const [newRole, setNewRole] = useState(role === 'admin' ? 'admin' : 'user');
-	const { isDeleted, error, isUpdated } = useSelector((state) => state.deluser);
+	const { error } = useSelector((state) => state.deluser);
 
 	const alert = toast;
 
-	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-	const nevigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const delOneUser = (id) => {
 		dispatch(delUser(id));
 		alert.success('User Deleted Successfully');
+		dispatch(loadAllUser());
+		navigate('/users');
 	};
 
 	const updateUserRole = (id, getrole) => {
 		dispatch(updateRole(id, getrole));
 		alert.success('User updated Successfully');
+		dispatch(loadAllUser());
+		navigate('/users');
 	};
 
 	useEffect(() => {
@@ -35,15 +45,17 @@ const GetAllUser = ({ name, email, role, index, _id }) => {
 			dispatch(clearError());
 		}
 
-		if (isDeleted) {
-			window.location.reload(false);
-			nevigate('/users');
-		}
-		if (isUpdated) {
-			window.location.reload(false);
-			nevigate('/users');
-		}
-	}, [dispatch, alert, error, isDeleted, nevigate, isUpdated]);
+		// if (isDeleted) {
+		// 	// window.location.reload(false);
+
+		// 	navigate('/users');
+		// }
+		// if (isUpdated) {
+		// 	// window.location.reload(false);
+		// 	// navigate('/users', { replace: false });
+		// 	navigate('/users');
+		// }
+	}, [dispatch, alert, error]);
 
 	return (
 		<>

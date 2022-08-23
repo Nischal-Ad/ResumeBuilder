@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
 	clearError,
 	dataCollect,
+	getAllResume,
 	UpdateResume,
 } from '../../actions/resumeAction';
 import { getCount } from '../../actions/recommendedAction';
@@ -80,23 +81,25 @@ const Form = () => {
 		newStep > 0 && newStep <= steps.length + 1 && setCurrentStep(newStep);
 	};
 
+	if (success === true) {
+		nevigate('/');
+		alert.success('resume created');
+		dispatch(getCount(id));
+		dispatch(getAllResume());
+	}
+
 	useEffect(() => {
 		if (error) {
 			alert.error(error);
 			dispatch(clearError());
 		}
-		if (success === true) {
-			nevigate('/');
-			alert.success('resume created');
-			dispatch(getCount(id));
-			window.location.reload(false);
-		}
+
 		if (currentStep === 4) {
 			setDisplay(true);
 		} else {
 			setDisplay(false);
 		}
-	}, [dispatch, error, success, nevigate, alert, currentStep, id]);
+	}, [dispatch, error, alert, currentStep]);
 
 	return (
 		<>

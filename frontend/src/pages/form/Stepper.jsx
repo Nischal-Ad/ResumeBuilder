@@ -67,11 +67,11 @@ const Stepper = ({ steps, currentStep }) => {
 						: 'flex items-center'
 				}
 			>
-				<div className='relative flex flex-col items-center text-red-600'>
+				<div className='relative flex flex-col items-center text-green-600'>
 					<div
 						className={`rounded-full duration-500 ease-in-out border-2 border-gray-300 h-12 w-12 flex items-center justify-center py-3 ${
 							step.selected
-								? 'bg-red-600 text-white font-bold boeder-green-600'
+								? 'bg-green-600 text-white font-bold boeder-green-600'
 								: ''
 						}`}
 					>

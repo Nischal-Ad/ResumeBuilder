@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react';
-import { delTemplate, clearError } from '../actions/templateAction';
+import {
+	delTemplate,
+	clearError,
+	loadAllTemplate,
+} from '../actions/templateAction';
 import { createrecommendation } from '../actions/recommendedAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
+// import { loadAllUser } from '../actions/userAction';
 
 const GetAllTemplate = ({ _id, name, desc, template, index }) => {
-	const { isDeleted, error } = useSelector((state) => state.tempDel);
+	const { error } = useSelector((state) => state.tempDel);
 	const { data } = useSelector((state) => state.allRecommended);
 
 	const alert = toast;
@@ -18,6 +23,8 @@ const GetAllTemplate = ({ _id, name, desc, template, index }) => {
 	const delTemp = (id) => {
 		dispatch(delTemplate(id));
 		alert.success('Template Deleted Successfully');
+		dispatch(loadAllTemplate());
+		nevigate('/resumes');
 	};
 
 	useEffect(() => {
@@ -35,11 +42,10 @@ const GetAllTemplate = ({ _id, name, desc, template, index }) => {
 			dispatch(clearError());
 		}
 
-		if (isDeleted) {
-			window.location.reload(false);
-			nevigate('/resumes');
-		}
-	}, [dispatch, alert, error, isDeleted, nevigate, _id, data]);
+		// if (isDeleted) {
+		// 	nevigate('/resumes');
+		// }
+	}, [dispatch, alert, error, data, _id]);
 
 	return (
 		<>

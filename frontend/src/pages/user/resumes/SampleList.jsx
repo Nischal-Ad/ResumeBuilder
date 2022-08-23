@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 const Sample = ({ _id, template }) => {
 	const { templatedata, error } = useSelector((state) => state.template);
-	const { isDeleted, error: delError } = useSelector((state) => state.resume);
+	const { error: delError } = useSelector((state) => state.resume);
 	const alert = toast;
 	const dispatch = useDispatch();
 
@@ -19,6 +19,7 @@ const Sample = ({ _id, template }) => {
 	const delProduct = (id) => {
 		dispatch(delresume(id));
 		alert.success('Template Deleted Successfully');
+		nevigate('/');
 	};
 
 	useEffect(() => {
@@ -31,12 +32,7 @@ const Sample = ({ _id, template }) => {
 			alert.error(delError);
 			dispatch(clearError());
 		}
-
-		if (isDeleted) {
-			nevigate('/');
-			window.location.reload(false);
-		}
-	}, [dispatch, alert, error, delError, nevigate, isDeleted]);
+	}, [dispatch, alert, error, delError]);
 
 	return (
 		<>
