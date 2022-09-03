@@ -37,11 +37,7 @@ const AdminHome = () => {
 		}
 		setCountData(countdata);
 		setTemplateName(name);
-<<<<<<< HEAD
 	}, [template, recommendedData, users]);
-=======
-	}, [users, recommendedData, template]);
->>>>>>> 9d22a9d243ac2784801fdbb8f9bf07da8be5079d
 
 	return (
 		<>
