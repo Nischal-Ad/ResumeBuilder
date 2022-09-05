@@ -91,6 +91,7 @@ userSchema.pre('save', async function (next) {
 	if (!this.isModified('password')) {
 		return next();
 	}
+
 	//hash password
 	this.password = await encrypt(this.password);
 

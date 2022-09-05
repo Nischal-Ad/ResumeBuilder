@@ -10,7 +10,7 @@ const getData = (url) =>
 
 const id = getElement.getAttribute('id');
 
-const url = `http://192.168.1.40:4000/api/v1/getmyresume/${id}`;
+const url = `http://localhost:5000/api/v1/getmyresume/${id}`;
 
 getData(url)
 	.then((data) => {
