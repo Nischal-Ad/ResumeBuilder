@@ -15,7 +15,8 @@ const Resumes = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(loadAllTemplate());
+		let search = '';
+		dispatch(loadAllTemplate(search));
 
 		if (error) {
 			alert.error(error);
