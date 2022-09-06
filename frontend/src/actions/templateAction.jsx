@@ -15,11 +15,11 @@ import {
 } from '../constants/templateConstants';
 import axios from 'axios';
 
-export const loadAllTemplate = () => async (dispatch) => {
+export const loadAllTemplate = (search) => async (dispatch) => {
 	try {
 		dispatch({ type: REQUEST });
 
-		const { data } = await axios.get(`/api/v1/getalltemplate`);
+		const { data } = await axios.get(`api/v1/getalltemplate?search=${search}`);
 
 		dispatch({
 			type: SUCCESS,

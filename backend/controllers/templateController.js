@@ -3,6 +3,7 @@ const ErrorHandler = require('../utils/errorhandler');
 const catchAsync = require('../middleware/catchAsync');
 const multer = require('multer');
 const path = require('path');
+const BinarySearch = require('../utils/BinarySearch');
 const { version } = require('os');
 
 const configFile = path.join(__dirname, '../../frontend/public/template');
@@ -51,7 +52,12 @@ exports.createTemplate = catchAsync(async (req, res, next) => {
 });
 
 exports.getTemplates = catchAsync(async (req, res, next) => {
-	const template = await Template.find();
+	const binarySearch = new BinarySearch(
+		await Template.find(),
+		req.query
+	).search();
+
+	const template = await binarySearch.query;
 	res.status(200).json({
 		success: true,
 		template,

@@ -6,6 +6,7 @@ const {
 	getTemplate,
 	uploadTemplate,
 	deleteTemplate,
+	binarySearch,
 } = require('../controllers/templateController');
 
 const router = express.Router();

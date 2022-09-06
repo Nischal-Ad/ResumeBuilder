@@ -37,8 +37,8 @@ import EditResume from './pages/user/resumes/EditResume';
 
 const App = () => {
 	const { isAuthenticated, role } = useSelector((state) => state.user);
-
 	useEffect(() => {
+		const search = '';
 		WebFont.load({
 			google: {
 				families: ['Nunito', 'Quicksand', 'Poppins'],
@@ -48,7 +48,7 @@ const App = () => {
 		store.dispatch(loadUser());
 		store.dispatch(getAllResume());
 		store.dispatch(loadAllUser());
-		store.dispatch(loadAllTemplate());
+		store.dispatch(loadAllTemplate(search));
 	}, []);
 
 	return (
