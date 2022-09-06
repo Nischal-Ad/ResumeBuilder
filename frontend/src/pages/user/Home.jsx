@@ -16,11 +16,12 @@ const Home = () => {
 	const { error, loading, resume } = useSelector((state) => state.allResume);
 
 	useEffect(() => {
+		let search = '';
 		if (error) {
 			alert.error(error);
 			dispatch(clearError());
 		}
-		dispatch(loadAllTemplate());
+		dispatch(loadAllTemplate(search));
 	}, [dispatch, error, alert]);
 
 	const totalresume = resume.length;

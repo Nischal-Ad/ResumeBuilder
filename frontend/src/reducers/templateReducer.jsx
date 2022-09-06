@@ -23,9 +23,14 @@ export const templateReducer = (state = { template: [] }, action) => {
 				template: [],
 				templatedata: [],
 			};
-
-		case ADD_SUCCESS:
 		case SUCCESS:
+			return {
+				...state,
+				loading: false,
+				template: action.payload,
+				templatedata: action.payload,
+			};
+		case ADD_SUCCESS:
 			return {
 				...state,
 				loading: false,
