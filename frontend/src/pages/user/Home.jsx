@@ -32,7 +32,7 @@ const Home = () => {
 
 	return (
 		<>
-			<MetaData title='Home' />;
+			<MetaData title='Home' />
 			{loading ? (
 				<Loading />
 			) : (
